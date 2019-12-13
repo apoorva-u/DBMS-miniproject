@@ -1,0 +1,47 @@
+CREATE TABLE APARTMENT
+(
+  Apt_no INT,
+  Apt_name VARCHAR(50) ,
+  Address VARCHAR(50) ,
+  No_of_flats INT ,
+  PRIMARY KEY (Apt_no)
+);
+
+CREATE TABLE PROVIDER
+(
+  PID INT,
+  Pname VARCHAR(50) ,
+  Ph_no NUMBER(10) ,
+  PRIMARY KEY (PID)
+);
+
+CREATE TABLE RESIDENT
+(
+  Flat_no INT,
+  Owner_name VARCHAR(50) ,
+  Ph_no NUMBER(10) ,
+  No_of_res INT ,
+  Apt_no INT ,
+  PRIMARY KEY (Flat_no),
+  FOREIGN KEY (Apt_no) REFERENCES APARTMENT(Apt_no)
+);
+
+CREATE TABLE SERVICE
+(
+  SID INT,
+  Sname VARCHAR(50) ,
+  Timings VARCHAR(15) ,
+  PID INT ,
+  PRIMARY KEY (SID),
+  FOREIGN KEY (PID) REFERENCES PROVIDER(PID)
+);
+
+CREATE TABLE SUBSCRIBES
+(
+  Bill_no INT,
+  Flat_no INT ,
+  SID INT ,
+  PRIMARY KEY (Bill_no),
+  FOREIGN KEY (Flat_no) REFERENCES RESIDENT(Flat_no),
+  FOREIGN KEY (SID) REFERENCES SERVICE(SID)
+);
